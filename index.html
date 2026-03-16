@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GradeUp — Free Student Tools | GPA, Study Timer, Grade Calculator & More</title>
+  <meta name="description" content="Free tools for students: GPA calculator, Pomodoro timer, weighted grade calculator, attendance tracker, study planner and more. No signup, no ads. Made for American students."/>
+  <meta name="keywords" content="GPA calculator, grade calculator, pomodoro timer, study timer, attendance tracker, college GPA, weighted grade calculator, final exam calculator, student tools, study planner"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://gradeup.vercel.app/"/>
+  <meta property="og:title" content="GradeUp — Free Student Tools"/>
+  <meta property="og:description" content="10 free tools every student needs. GPA, grades, timers, planners. No signup."/>
+  <meta property="og:type" content="website"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"GradeUp","url":"https://gradeup.vercel.app","description":"Free tools for American students"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet"/>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --cream:#faf8f3;--ink:#0f0e0c;--lime:#c8f135;--pink:#ff6b9d;
+      --blue:#4facfe;--purple:#a78bfa;--orange:#ff9a3c;--red:#ff4757;
+      --border:#e8e4d8;--card:#ffffff;--muted:#9b9488;
+      --fd:'Clash Display','Plus Jakarta Sans',sans-serif;
+      --fb:'Plus Jakarta Sans',sans-serif;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--cream);color:var(--ink);font-family:var(--fb);overflow-x:hidden;min-height:100vh}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+
+    /* NAV */
+    nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2.5rem;border-bottom:2px solid var(--ink);background:var(--cream);position:sticky;top:0;z-index:100}
+    .logo{font-family:var(--fd);font-size:1.6rem;font-weight:700;letter-spacing:-.04em;display:flex;align-items:center;gap:.4rem}
+    .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--lime);display:inline-block;border:2px solid var(--ink)}
+    .nav-pill{background:var(--ink);color:var(--lime);font-family:var(--fd);font-size:.72rem;font-weight:600;padding:.35rem .9rem;border-radius:100px;letter-spacing:.02em;text-transform:uppercase}
+
+    /* HERO */
+    .hero{padding:4rem 2.5rem 3rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:start;gap:2rem}
+    .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:var(--lime);font-size:.72rem;font-weight:600;padding:.3rem .8rem;border-radius:100px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:1.5rem;font-family:var(--fd)}
+    h1{font-family:var(--fd);font-size:clamp(3.2rem,7vw,6.5rem);font-weight:700;line-height:.92;letter-spacing:-.04em;margin-bottom:1.5rem}
+    h1 em{font-style:normal;background:var(--lime);color:var(--ink);padding:0 .15em;border-radius:6px}
+    .hero-sub{font-size:1.05rem;color:var(--muted);max-width:480px;line-height:1.65;margin-bottom:2.5rem}
+    .hero-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--cream);font-family:var(--fd);font-size:.95rem;font-weight:600;padding:.9rem 1.8rem;border-radius:100px;border:2px solid var(--ink);cursor:pointer;transition:background .15s,color .15s}
+    .hero-cta:hover{background:var(--lime);color:var(--ink)}
+    .hero-right{display:flex;flex-direction:column;gap:.8rem;padding-top:4rem}
+    .stat-bubble{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:1rem 1.4rem;box-shadow:4px 4px 0 var(--ink);white-space:nowrap}
+    .stat-bubble .n{font-family:var(--fd);font-size:2rem;font-weight:700;letter-spacing:-.04em}
+    .stat-bubble .l{font-size:.75rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+
+    /* TOOLS */
+    .tools-section{padding:0 2.5rem 5rem;max-width:1100px;margin:0 auto}
+    .sec-eye{font-family:var(--fd);font-size:.75rem;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+    .sec-eye::after{content:'';flex:1;height:2px;background:var(--border)}
+    .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+    .tool-card{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:1.6rem;cursor:pointer;transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden;text-align:left;width:100%;font-family:var(--fb);color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+    .tool-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+    .tool-card:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+    .ca{position:absolute;top:0;right:0;width:60px;height:60px;border-radius:0 18px 0 60px}
+    .c-lime .ca{background:var(--lime)}.c-pink .ca{background:var(--pink)}.c-blue .ca{background:var(--blue)}
+    .c-purple .ca{background:var(--purple)}.c-orange .ca{background:var(--orange)}.c-red .ca{background:var(--red)}
+    .tn{font-family:var(--fd);font-size:.68rem;font-weight:600;color:var(--muted);letter-spacing:.1em;margin-bottom:1rem}
+    .ti{font-size:2rem;margin-bottom:.8rem;display:block;line-height:1}
+    .tname{font-family:var(--fd);font-size:1.1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
+    .tdesc{font-size:.83rem;color:var(--muted);line-height:1.5}
+    .tbadge{display:inline-block;margin-top:1rem;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .6rem;border-radius:100px;border:1.5px solid currentColor}
+
+    /* PANEL */
+    .pw{position:fixed;inset:0;z-index:200;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;opacity:0;transition:opacity .2s}
+    .pw.open{pointer-events:all;opacity:1}
+    .pbg{position:absolute;inset:0;background:rgba(15,14,12,.6);backdrop-filter:blur(6px)}
+    .panel{position:relative;background:var(--cream);border:2px solid var(--ink);border-bottom:none;border-radius:24px 24px 0 0;width:100%;max-width:640px;max-height:92vh;overflow-y:auto;transform:translateY(50px);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+    .pw.open .panel{transform:translateY(0)}
+    .phandle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:1rem auto 0}
+    .phead{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:2px solid var(--border);position:sticky;top:0;background:var(--cream);z-index:2}
+    .ptitle{font-family:var(--fd);font-size:1.1rem;font-weight:700;letter-spacing:-.02em}
+    .px{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--cream);border:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;font-family:var(--fb)}
+    .px:hover{background:#333}
+    .pbody{padding:2rem}
+
+    /* FORM */
+    .field{margin-bottom:1.1rem}
+    label{display:block;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.45rem;font-family:var(--fd)}
+    input,select,textarea{width:100%;background:#fff;border:2px solid var(--ink);border-radius:12px;color:var(--ink);font-family:var(--fb);font-size:1rem;padding:.7rem 1rem;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(167,139,250,.2)}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .btn{width:100%;padding:.9rem;margin-top:.5rem;background:var(--ink);color:var(--lime);border:2px solid var(--ink);border-radius:12px;font-family:var(--fd);font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:-.01em;transition:background .15s,color .15s}
+    .btn:hover{background:var(--lime);color:var(--ink)}
+    .rcard{margin-top:1.4rem;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:1.4rem;box-shadow:3px 3px 0 var(--ink)}
+    .rl{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem;font-family:var(--fd)}
+    .rv{font-family:var(--fd);font-size:2.2rem;font-weight:700;letter-spacing:-.04em;line-height:1}
+    .rd{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
+
+    /* Pomodoro */
+    .pomo-modes{display:flex;gap:.5rem;margin-bottom:1.5rem}
+    .pm{flex:1;padding:.55rem;border-radius:10px;border:2px solid var(--border);font-family:var(--fd);font-size:.78rem;font-weight:600;cursor:pointer;background:transparent;color:var(--muted);transition:all .15s}
+    .pm.active{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+    .pring{width:180px;height:180px;margin:0 auto 1rem;position:relative}
+    .pring svg{width:100%;height:100%;transform:rotate(-90deg)}
+    .pring circle{fill:none;stroke-width:8}
+    .pring .pbg2{stroke:var(--border)}
+    .pring .pfg{stroke:var(--lime);stroke-linecap:round;transition:stroke-dashoffset 1s linear}
+    .ptxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .ptime{font-family:var(--fd);font-size:3.5rem;font-weight:700;letter-spacing:-.06em;line-height:1}
+    .plbl2{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.3rem;font-family:var(--fd)}
+    .pbtns{display:flex;gap:.8rem;margin-top:1.5rem}
+    .pbtn{flex:1;padding:.75rem;border-radius:12px;border:2px solid var(--ink);font-family:var(--fd);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .15s}
+    .pbtn.pri{background:var(--ink);color:var(--lime)}.pbtn.pri:hover{background:var(--lime);color:var(--ink)}
+    .pbtn.sec{background:transparent;color:var(--ink)}.pbtn.sec:hover{background:var(--border)}
+
+    /* Attendance */
+    .att-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:1rem 0}
+    .aday{aspect-ratio:1;border-radius:6px;border:1.5px solid var(--border);cursor:pointer;transition:all .1s;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--muted)}
+    .aday.pres{background:var(--lime);border-color:var(--ink);color:var(--ink)}
+    .aday.abs{background:var(--pink);border-color:var(--ink);color:#fff}
+
+    /* Footer */
+    footer{border-top:2px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .flogo{font-family:var(--fd);font-weight:700;font-size:1.1rem;letter-spacing:-.03em}
+    .ftxt{font-size:.78rem;color:var(--muted)}
+
+    /* Animations */
+    @keyframes popIn{from{opacity:0;transform:scale(.92) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .tool-card{animation:popIn .4s ease both}
+    .tool-card:nth-child(1){animation-delay:.04s}.tool-card:nth-child(2){animation-delay:.08s}.tool-card:nth-child(3){animation-delay:.12s}
+    .tool-card:nth-child(4){animation-delay:.16s}.tool-card:nth-child(5){animation-delay:.20s}.tool-card:nth-child(6){animation-delay:.24s}
+    .tool-card:nth-child(7){animation-delay:.28s}.tool-card:nth-child(8){animation-delay:.32s}.tool-card:nth-child(9){animation-delay:.36s}
+    .tool-card:nth-child(10){animation-delay:.40s}
+
+    @media(max-width:700px){
+      .hero{grid-template-columns:1fr}.hero-right{flex-direction:row;flex-wrap:wrap;padding-top:0}
+      nav,footer{padding:1rem 1.2rem}.hero{padding:3rem 1.2rem 2rem}.tools-section{padding:0 1.2rem 4rem}
+      h1{font-size:3rem}.row2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Grade<span style="color:var(--lime)">Up</span><span class="logo-dot"></span></div>
+  <div class="nav-pill">Free · No Login</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">✦ Student toolkit 2025</div>
+    <h1>Study smarter,<br/><em>not harder.</em></h1>
+    <p class="hero-sub">10 free tools built for American students. GPA tracker, Pomodoro timer, grade calculator and more. Works instantly — no signup ever.</p>
+    <button class="hero-cta" onclick="document.querySelector('.tools-section').scrollIntoView({behavior:'smooth'})">Browse tools ↓</button>
+  </div>
+  <div class="hero-right">
+    <div class="stat-bubble"><div class="n" style="color:var(--purple)">10</div><div class="l">Free tools</div></div>
+    <div class="stat-bubble"><div class="n" style="color:var(--pink)">0</div><div class="l">Ads</div></div>
+    <div class="stat-bubble"><div class="n" style="color:var(--lime)">∞</div><div class="l">Uses</div></div>
+  </div>
+</section>
+
+<section class="tools-section">
+  <div class="sec-eye">All 10 tools</div>
+  <div class="tools-grid">
+    <button class="tool-card c-lime" onclick="O('gpa')"><div class="ca"></div><div class="tn">01</div><span class="ti">🎓</span><div class="tname">GPA Calculator</div><div class="tdesc">Semester GPA on the 4.0 scale. Add unlimited courses.</div><span class="tbadge" style="color:var(--ink)">Most used</span></button>
+    <button class="tool-card c-pink" onclick="O('pomo')"><div class="ca"></div><div class="tn">02</div><span class="ti">🍅</span><div class="tname">Pomodoro Timer</div><div class="tdesc">Focus sessions with visual ring countdown. Custom intervals.</div><span class="tbadge" style="color:var(--pink)">Interactive</span></button>
+    <button class="tool-card c-blue" onclick="O('wgrade')"><div class="ca"></div><div class="tn">03</div><span class="ti">📊</span><div class="tname">Weighted Grade Calc</div><div class="tdesc">Mix assignments, tests, and finals with custom weights.</div><span class="tbadge" style="color:var(--blue)">Popular</span></button>
+    <button class="tool-card c-purple" onclick="O('final')"><div class="ca"></div><div class="tn">04</div><span class="ti">😬</span><div class="tname">Final Exam Needed</div><div class="tdesc">Exactly what score you need to hit your target grade.</div><span class="tbadge" style="color:var(--purple)">Clutch</span></button>
+    <button class="tool-card c-orange" onclick="O('att')"><div class="ca"></div><div class="tn">05</div><span class="ti">📅</span><div class="tname">Attendance Tracker</div><div class="tdesc">Tap days to log attendance. See your % and cuts left.</div><span class="tbadge" style="color:var(--orange)">Visual</span></button>
+    <button class="tool-card c-lime" onclick="O('cgpa')"><div class="ca"></div><div class="tn">06</div><span class="ti">📈</span><div class="tname">Cumulative GPA</div><div class="tdesc">Combine multiple semesters for your overall GPA.</div><span class="tbadge" style="color:var(--ink)">Multi-sem</span></button>
+    <button class="tool-card c-red" onclick="O('loan')"><div class="ca"></div><div class="tn">07</div><span class="ti">💸</span><div class="tname">Student Loan Calc</div><div class="tdesc">Monthly payment, total interest, payoff date.</div><span class="tbadge" style="color:var(--red)">Finance</span></button>
+    <button class="tool-card c-blue" onclick="O('words')"><div class="ca"></div><div class="tn">08</div><span class="ti">✍️</span><div class="tname">Essay Word Counter</div><div class="tdesc">Words, characters, sentences, reading time — live.</div><span class="tbadge" style="color:var(--blue)">Writing</span></button>
+    <button class="tool-card c-pink" onclick="O('study')"><div class="ca"></div><div class="tn">09</div><span class="ti">🗓️</span><div class="tname">Study Time Planner</div><div class="tdesc">Enter your exam date, get a personalized daily plan.</div><span class="tbadge" style="color:var(--pink)">Planner</span></button>
+    <button class="tool-card c-purple" onclick="O('scale')"><div class="ca"></div><div class="tn">10</div><span class="ti">🔢</span><div class="tname">Grade Scale Converter</div><div class="tdesc">Convert between %, letter grades, and GPA points.</div><span class="tbadge" style="color:var(--purple)">Quick</span></button>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">GradeUp ✦</div>
+  <div class="ftxt">Free for students, forever. No ads, no cookies, no data collected.</div>
+</footer>
+
+<!-- PANEL -->
+<div class="pw" id="PW">
+  <div class="pbg" onclick="C()"></div>
+  <div class="panel">
+    <div class="phandle"></div>
+    <div class="phead"><div class="ptitle" id="PT"></div><button class="px" onclick="C()">✕</button></div>
+    <div class="pbody" id="PB"></div>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+function RC(val,det,lbl,col){col=col||'var(--purple)';return`<div class="rcard"><div class="rl">${lbl}</div><div class="rv" style="color:${col}">${val}</div><div class="rd">${det}</div></div>`}
+
+// ── Pomo state ──
+let PS={run:false,mode:'work',w:25,b:5,rem:1500,tot:1500,tid:null};
+
+const TOOLS={
+  gpa:{t:'🎓 GPA Calculator',h:()=>`<div id="GR">${[1,2,3,4].map((i)=>`<div class="row2" style="margin-bottom:.7rem"><div class="field" style="margin:0"><label>Course ${i}</label><select class="gg"><option>A</option><option>A-</option><option>B+</option><option>B</option><option>B-</option><option>C+</option><option>C</option><option>C-</option><option>D+</option><option>D</option><option>F</option></select></div><div class="field" style="margin:0"><label>Credits</label><input class="gc" type="number" value="3" min="1" max="6"/></div></div>`).join('')}</div><button class="btn" style="background:transparent;color:var(--ink)" onclick="addGR()">+ Add Course</button><button class="btn" style="background:var(--purple);border-color:var(--purple);margin-top:.5rem" onclick="cGPA()">Calculate GPA</button><div id="R"></div>`},
+  pomo:{t:'🍅 Pomodoro Timer',h:()=>`<div class="pomo-modes"><button class="pm active" id="mW" onclick="setM('work')">Focus 🧠</button><button class="pm" id="mB" onclick="setM('brk')">Short Break ☕</button><button class="pm" id="mL" onclick="setM('long')">Long Break 🛋️</button></div><div class="pring"><svg viewBox="0 0 100 100"><circle class="pbg2" cx="50" cy="50" r="44"/><circle class="pfg" id="RNG" cx="50" cy="50" r="44" stroke-dasharray="276.5" stroke-dashoffset="0"/></svg><div class="ptxt"><div class="ptime" id="PTM">25:00</div><div class="plbl2" id="PLB">Focus Time</div></div></div><div class="pbtns"><button class="pbtn pri" id="PST" onclick="toggleP()">▶ Start</button><button class="pbtn sec" onclick="resetP()">↺ Reset</button></div><div style="margin-top:1.5rem"><div class="row2"><div class="field"><label>Focus (min)</label><input type="number" id="PWM" value="25" min="1" max="90" onchange="custP()"/></div><div class="field"><label>Break (min)</label><input type="number" id="PBM" value="5" min="1" max="30" onchange="custP()"/></div></div></div>`},
+  wgrade:{t:'📊 Weighted Grade Calculator',h:()=>`<div id="WR">${[['Homework',30],['Midterm',30],['Final Exam',40]].map(([n,w])=>`<div class="row2" style="margin-bottom:.7rem"><div class="field" style="margin:0"><label>${n} (%)</label><input class="ws" type="number" placeholder="85"/></div><div class="field" style="margin:0"><label>Weight (%)</label><input class="ww" type="number" value="${w}"/></div></div>`).join('')}</div><button class="btn" style="background:transparent;color:var(--ink)" onclick="addWR()">+ Add Category</button><button class="btn" style="background:var(--blue);border-color:var(--blue);margin-top:.5rem" onclick="cWG()">Calculate Grade</button><div id="R"></div>`},
+  final:{t:'😬 Final Exam Score Needed',h:()=>`<div class="field"><label>Current Grade (%)</label><input type="number" id="CG" placeholder="78"/></div><div class="row2"><div class="field"><label>Target Grade (%)</label><input type="number" id="TG" placeholder="85"/></div><div class="field"><label>Final Weight (%)</label><input type="number" id="FW" placeholder="30"/></div></div><button class="btn" style="background:var(--purple);border-color:var(--purple)" onclick="cFIN()">Calculate</button><div id="R"></div>`},
+  att:{t:'📅 Attendance Tracker',h:()=>`<div class="row2"><div class="field"><label>Total Class Days</label><input type="number" id="TD" value="30" min="1" onchange="rAtt()"/></div><div class="field"><label>Min Attendance %</label><input type="number" id="MA" value="75"/></div></div><p style="font-size:.8rem;color:var(--muted);margin-bottom:.8rem">Tap: <span style="background:var(--lime);border-radius:4px;padding:0 4px;color:var(--ink)">green</span>=present <span style="background:var(--pink);border-radius:4px;padding:0 4px;color:#fff">pink</span>=absent</p><div class="att-grid" id="AG"></div><button class="btn" style="background:var(--orange);border-color:var(--orange)" onclick="cAtt()">Calculate</button><div id="R"></div>`},
+  cgpa:{t:'📈 Cumulative GPA Calculator',h:()=>`<div id="SR"><div class="row2" style="margin-bottom:.7rem"><div class="field" style="margin:0"><label>Semester 1 GPA</label><input class="sg" type="number" step="0.01" placeholder="3.5" min="0" max="4"/></div><div class="field" style="margin:0"><label>Credits</label><input class="sc" type="number" value="15"/></div></div><div class="row2" style="margin-bottom:.7rem"><div class="field" style="margin:0"><label>Semester 2 GPA</label><input class="sg" type="number" step="0.01" placeholder="3.2" min="0" max="4"/></div><div class="field" style="margin:0"><label>Credits</label><input class="sc" type="number" value="15"/></div></div></div><button class="btn" style="background:transparent;color:var(--ink)" onclick="addSR()">+ Add Semester</button><button class="btn" style="background:var(--lime);color:var(--ink);border-color:var(--ink);margin-top:.5rem" onclick="cCGPA()">Calculate Cumulative GPA</button><div id="R"></div>`},
+  loan:{t:'💸 Student Loan Calculator',h:()=>`<div class="field"><label>Loan Amount ($)</label><input type="number" id="LA" placeholder="35000"/></div><div class="row2"><div class="field"><label>Interest Rate (%)</label><input type="number" id="LI" placeholder="5.5" step="0.1"/></div><div class="field"><label>Repayment (years)</label><input type="number" id="LY" placeholder="10"/></div></div><button class="btn" style="background:var(--red);border-color:var(--red)" onclick="cLoan()">Calculate</button><div id="R"></div>`},
+  words:{t:'✍️ Essay Word Counter',h:()=>`<div class="field"><label>Paste your essay</label><textarea id="EA" style="min-height:140px;resize:vertical" placeholder="Paste or type your text here..." oninput="liveW()"></textarea></div><div id="R"></div>`},
+  study:{t:'🗓️ Study Time Planner',h:()=>`<div class="field"><label>Subject / Exam name</label><input type="text" id="SB" placeholder="AP Chemistry Final"/></div><div class="row2"><div class="field"><label>Exam Date</label><input type="date" id="ED"/></div><div class="field"><label>Hours/day available</label><input type="number" id="HPD" placeholder="2" step="0.5"/></div></div><div class="field"><label>Difficulty (1–5)</label><select id="DF"><option value="1">1 – Easy</option><option value="2">2 – Light</option><option value="3" selected>3 – Medium</option><option value="4">4 – Hard</option><option value="5">5 – Brutal</option></select></div><button class="btn" style="background:var(--pink);border-color:var(--pink)" onclick="cStudy()">Generate Plan</button><div id="R"></div>`},
+  scale:{t:'🔢 Grade Scale Converter',h:()=>`<div class="field"><label>Enter a value</label><input type="number" id="SV" placeholder="87" oninput="cScale()"/></div><div class="field"><label>Input type</label><select id="ST" onchange="cScale()"><option value="pct">Percentage (%)</option><option value="gpa">GPA points (0–4.0)</option></select></div><div id="R"></div>`},
+};
+
+function O(k){$('PT').textContent=TOOLS[k].t;$('PB').innerHTML=TOOLS[k].h();$('PW').classList.add('open');if(k==='att')setTimeout(rAtt,50);if(k==='pomo'){resetP();setTimeout(uRing,50);}if(k==='words')setTimeout(liveW,50);}
+function C(){$('PW').classList.remove('open');if(PS.tid){clearInterval(PS.tid);PS.tid=null;PS.run=false;}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')C();});
+
+// GPA
+const GM={A:4,'A-':3.7,'B+':3.3,B:3,'B-':2.7,'C+':2.3,C:2,'C-':1.7,'D+':1.3,D:1,F:0};
+function addGR(){const n=document.querySelectorAll('.gg').length+1;const d=document.createElement('div');d.className='row2';d.style.marginBottom='.7rem';d.innerHTML=`<div class="field" style="margin:0"><label>Course ${n}</label><select class="gg"><option>A</option><option>A-</option><option>B+</option><option>B</option><option>B-</option><option>C+</option><option>C</option><option>C-</option><option>D+</option><option>D</option><option>F</option></select></div><div class="field" style="margin:0"><label>Credits</label><input class="gc" type="number" value="3" min="1" max="6"/></div>`;$('GR').appendChild(d);}
+function cGPA(){const gs=[...document.querySelectorAll('.gg')],cs=[...document.querySelectorAll('.gc')];let p=0,c=0;gs.forEach((g,i)=>{const cr=+cs[i].value||0;p+=GM[g.value]*cr;c+=cr;});if(!c)return;const gpa=(p/c).toFixed(2);const col=gpa>=3.5?'var(--lime)':gpa>=3?'var(--blue)':gpa>=2?'var(--orange)':'var(--red)';const lt=gpa>=3.7?'A':gpa>=3.3?'A-':gpa>=3?'B+':gpa>=2.7?'B':gpa>=2.3?'B-':gpa>=2?'C':gpa>=1?'D':'F';$('R').innerHTML=RC(`${gpa}<span style="font-size:1.2rem;color:var(--muted)">/4.0</span>`,`${c} credit hours · Letter: <strong>${lt}</strong>`,'Semester GPA',col);}
+
+// Pomodoro
+function uRing(){const el=$('RNG');if(!el)return;const pct=PS.rem/PS.tot;el.style.strokeDashoffset=(276.5*(1-pct)).toString();const m=Math.floor(PS.rem/60),s=PS.rem%60;const t=$('PTM');if(t)t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+function setM(mode){clearInterval(PS.tid);PS.tid=null;PS.run=false;const b=$('PST');if(b)b.textContent='▶ Start';document.querySelectorAll('.pm').forEach(x=>x.classList.remove('active'));const ids={work:'mW',brk:'mB',long:'mL'};const m=$(ids[mode]);if(m)m.classList.add('active');const mins=mode==='work'?PS.w:mode==='brk'?PS.b:15;PS.mode=mode;PS.rem=mins*60;PS.tot=mins*60;const l=$('PLB');if(l)l.textContent=mode==='work'?'Focus Time':mode==='brk'?'Short Break':'Long Break';uRing();}
+function toggleP(){if(PS.run){clearInterval(PS.tid);PS.tid=null;PS.run=false;const b=$('PST');if(b)b.textContent='▶ Resume';}else{PS.run=true;const b=$('PST');if(b)b.textContent='⏸ Pause';PS.tid=setInterval(()=>{PS.rem--;uRing();if(PS.rem<=0){clearInterval(PS.tid);PS.tid=null;PS.run=false;const b=$('PST');if(b)b.textContent='▶ Start';alert(PS.mode==='work'?'✅ Focus session done! Take a break 🎉':'☕ Break over! Back to focus.');setM(PS.mode==='work'?'brk':'work');}},1000);}}
+function resetP(){clearInterval(PS.tid);PS.tid=null;PS.run=false;const b=$('PST');if(b)b.textContent='▶ Start';setM('work');}
+function custP(){const w=+($('PWM')&&$('PWM').value)||25,b=+($('PBM')&&$('PBM').value)||5;PS.w=w;PS.b=b;setM(PS.mode);}
+
+// Weighted Grade
+function addWR(){const n=document.querySelectorAll('.ws').length+1;const d=document.createElement('div');d.className='row2';d.style.marginBottom='.7rem';d.innerHTML=`<div class="field" style="margin:0"><label>Category ${n} (%)</label><input class="ws" type="number" placeholder="85"/></div><div class="field" style="margin:0"><label>Weight (%)</label><input class="ww" type="number" value="20"/></div>`;$('WR').appendChild(d);}
+function cWG(){const sc=[...document.querySelectorAll('.ws')],wt=[...document.querySelectorAll('.ww')];let tot=0,ws=0;sc.forEach((s,i)=>{const sv=+s.value,w=+wt[i].value||0;if(s.value!==''){tot+=sv*w;ws+=w;}});if(!ws)return;const g=(tot/ws).toFixed(1);const lt=g>=93?'A':g>=90?'A-':g>=87?'B+':g>=83?'B':g>=80?'B-':g>=77?'C+':g>=73?'C':g>=70?'C-':g>=67?'D+':g>=60?'D':'F';const col=g>=90?'var(--lime)':g>=80?'var(--blue)':g>=70?'var(--orange)':'var(--red)';$('R').innerHTML=RC(`${g}% <span style="font-size:1.2rem;color:var(--muted)">${lt}</span>`,`Weight used: ${ws}%${ws<100?` · ${100-ws}% still ungraded`:''}`,'Your Course Grade',col);}
+
+// Final Exam
+function cFIN(){const c=+$('CG').value,t=+$('TG').value,w=+$('FW').value/100;if(!c||!t||!w)return;const n=(t-c*(1-w))/w;const col=n<=100?(n<=70?'var(--lime)':'var(--orange)'):'var(--red)';$('R').innerHTML=RC(`${n.toFixed(1)}%`,n>100?'⚠️ Not mathematically possible':n>90?'💪 High bar — you got this!':n<=60?'😌 You basically already have it!':'✅ Very achievable!','Score Needed on Final',col);}
+
+// Attendance
+let AD=[];
+function rAtt(){const n=+($('TD')&&$('TD').value)||30;while(AD.length<n)AD.push(null);AD=AD.slice(0,n);const g=$('AG');if(!g)return;g.innerHTML=AD.map((d,i)=>`<div class="aday${d===true?' pres':d===false?' abs':''}" onclick="tAtt(${i})">${i+1}</div>`).join('');}
+function tAtt(i){AD[i]=AD[i]===null?true:AD[i]===true?false:null;rAtt();}
+function cAtt(){const pres=AD.filter(d=>d===true).length,abs=AD.filter(d=>d===false).length,tot=pres+abs;if(!tot){$('R').innerHTML=RC('—','Tap days above first','Attendance','var(--muted)');return;}const pct=(pres/tot*100).toFixed(1),min=+($('MA')&&$('MA').value)||75;const left=Math.max(0,Math.floor(pres/min*100)-tot);const col=pct>=min?'var(--lime)':'var(--red)';$('R').innerHTML=RC(`${pct}%`,`${pres} present · ${abs} absent<br>${pct>=min?`Can miss <strong>${left}</strong> more classes`:`⚠️ Below ${min}% minimum`}`,'Attendance Rate',col);}
+
+// Cumulative GPA
+function addSR(){const n=document.querySelectorAll('.sg').length+1;const d=document.createElement('div');d.className='row2';d.style.marginBottom='.7rem';d.innerHTML=`<div class="field" style="margin:0"><label>Semester ${n} GPA</label><input class="sg" type="number" step="0.01" placeholder="3.5" min="0" max="4"/></div><div class="field" style="margin:0"><label>Credits</label><input class="sc" type="number" value="15"/></div>`;$('SR').appendChild(d);}
+function cCGPA(){const gs=[...document.querySelectorAll('.sg')],cs=[...document.querySelectorAll('.sc')];let p=0,c=0;gs.forEach((g,i)=>{const gv=+g.value,cr=+cs[i].value||0;if(g.value!==''){p+=gv*cr;c+=cr;}});if(!c)return;const gpa=(p/c).toFixed(3);const col=gpa>=3.5?'var(--lime)':gpa>=3?'var(--blue)':gpa>=2?'var(--orange)':'var(--red)';$('R').innerHTML=RC(`${gpa}<span style="font-size:1.2rem;color:var(--muted)">/4.0</span>`,`${c} total credits · ${gs.filter(g=>g.value).length} semesters`,'Cumulative GPA',col);}
+
+// Loan
+function cLoan(){const P=+$('LA').value,r=+$('LI').value/100/12,n=+$('LY').value*12;if(!P||!r||!n)return;const m=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),tot=m*n,int=tot-P;$('R').innerHTML=RC(`$${fmt(m.toFixed(0))}<span style="font-size:1rem;color:var(--muted)">/mo</span>`,`Total interest: $${fmt(int.toFixed(0))}<br>Total repaid: $${fmt(tot.toFixed(0))}`,'Monthly Payment','var(--red)');}
+
+// Words
+function liveW(){const el=$('EA');if(!el)return;const txt=el.value.trim();if(!txt){$('R').innerHTML='';return;}const w=txt.split(/\s+/).filter(Boolean).length,ch=txt.length,se=txt.split(/[.!?]+/).filter(Boolean).length,pa=txt.split(/\n\s*\n/).filter(Boolean).length,rt=Math.ceil(w/200);$('R').innerHTML=RC(`${w.toLocaleString()}`,`${ch.toLocaleString()} chars · ${se} sentences · ${pa} para${pa!==1?'s':''}<br>~${rt} min read`,'Word Count','var(--blue)');}
+
+// Study
+function cStudy(){const sb=$('SB').value||'Your Exam',date=new Date($('ED').value),hpd=+$('HPD').value||2,diff=+$('DF').value;if(isNaN(date.getTime()))return;const days=Math.max(1,Math.round((date-new Date())/(864e5)));const tot=days*hpd;const items=[['📖 Review notes',.20],['📝 Practice problems',.30],['📋 Past exams',.25],['🎯 Weak spots',.15],['🏁 Final review',.10]];const rows=items.map(([t,w])=>`<div style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.85rem"><span>${t}</span><strong>${(tot*w*(diff/3)).toFixed(1)}h</strong></div>`).join('');$('R').innerHTML=`<div class="rcard"><div class="rl">Study Plan — ${sb}</div><div class="rv" style="color:var(--pink)">${days} days</div><div style="margin:.6rem 0 .3rem;font-size:.8rem;color:var(--muted)">${hpd}h/day · ~${tot.toFixed(0)}h total</div>${rows}</div>`;}
+
+// Scale
+function cScale(){const v=+$('SV').value,tp=$('ST').value;if(!$('SV').value)return;const p2l=p=>p>=93?'A':p>=90?'A-':p>=87?'B+':p>=83?'B':p>=80?'B-':p>=77?'C+':p>=73?'C':p>=70?'C-':p>=67?'D+':p>=60?'D':'F';const p2g=p=>p>=93?4.0:p>=90?3.7:p>=87?3.3:p>=83?3.0:p>=80?2.7:p>=77?2.3:p>=73?2.0:p>=70?1.7:p>=67?1.3:p>=60?1.0:0.0;let pct,lt,gpa;if(tp==='pct'){pct=v;lt=p2l(v);gpa=p2g(v);}else{gpa=v;pct=v>=4?97:v>=3.7?93:v>=3.3?90:v>=3?87:v>=2.7?83:v>=2.3?80:v>=2?77:v>=1.7?73:v>=1.3?70:v>=1?65:50;lt=p2l(pct);}$('R').innerHTML=RC(lt,`Percentage: ${pct}% · GPA: ${typeof gpa==='number'?gpa.toFixed(1):gpa}`,'Grade Equivalent','var(--purple)');}
+</script>
+</body>
+</html>
